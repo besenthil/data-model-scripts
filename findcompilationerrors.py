@@ -15,21 +15,18 @@ import time
     
 def findCompilationErrors(v_filename,lstr_findString):
     print ("Start time:" , time.time())
-    file = open(v_filename)
+    file = open(v_filename,'r')
     block =""
     #Scans till a new line is encountered. The lines are appended to a block of text
     #Once a new line is found the block is sought for SQL State Errors.
     for content in file:
-        if(content == "\n"):
+        if(content in( '\n','\r\n')):
+            #print content
             if (block.find(lstr_findString) > 0):
-                #print (block)
+                print (block)
                 block = ""
             block = ""
         else:
             block+=content
     
     print ("End time:" , time.time())
-  
-    
-                   
-findCompilationErrors('C:\Eclipse\Projects\en.senthil.python.first\Training\SearchFile\AverageCaseSearchFile.txt','SQL')
